@@ -89,8 +89,8 @@ class Migration(migrations.Migration):
     ]
 ```
 
-```sh
 Important! If we don’t want use previous dependencies such 0001_initial, just comment all the Operations in all the files like ‘0003_studentenroll_phone.py’.
+```sh
 python manage.py migrate 
 ```
 ```sh
@@ -107,20 +107,21 @@ class Migration(migrations.Migration):
     ]
 ```
 
-# Django_React_Mssql --- Front end --- React
-
-#python manage.py migrate hzx zero # If we want to reverse all migrations applied for an app, use the name zero
-
 A view is the initial entrypoint of a request made upon a specific endpoint served by a URL. This is all mapped by the Django REST framework once we connect the function itself to the endpoint. We’ll also make use of serializers which allow complex data, such as QuerySets and model instances, to be converted to native Python datatypes that can then be easily rendered into JSON. Let create a new file serializers.py into the hzx/ folder and add the following content.
+
+```sh
 from rest_framework import serializers
 from .models import StudentInfo
 class StudentInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = StudentInfo
         fields = ('pk', 'name', 'email', 'document', 'phone', 'registrationDate')
+```
 The Meta class is important here because it defines the metadata information that our model has (database) and that must be converted to the StudentInfo class.
 
 Let’s open the urls.py file located in the web_project/ folder and change its content to the following.
+
+```sh
 from django.contrib import admin
 from hzx import views
 from django.urls import path, re_path
@@ -130,8 +131,11 @@ urlpatterns = [
     re_path(r'^api/hzx/$', views.students_set),
     re_path(r'^api/hzx/([0-9])$', views.students_info),
 ]
+```
 
 The hzx/views.py has codes as follows. The first endpoint will handle both creations (POST) and listing (GET). The second one will remove (DELETE) or update (PUT) the data of a single studentinfo.
+
+```sh
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
@@ -172,6 +176,7 @@ def students_info(request, pk):
     elif request.method == 'DELETE':
         student.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+```
 For the POST method, note that we’re first calling the is_valid() method on the serializer to ensure that the data received is conformed with our model.
 
 python manage.py runserver # run our Django application in order to test these endpoints. Access http://localhost:8000/api/hzx/.
@@ -179,21 +184,31 @@ python manage.py runserver # run our Django application in order to test these e
 We will see the Django’s Browsable API, a human-friendly HTML output that allows for easy browsing of resources, as well as forms for submitting data to the resources. It’s very handy for testing our endpoints easily without having to make use of cURL or other UI tools.
 
 ## Front end - React App
-#Aforementioned is the part of back-end building.Now we come to the front-end React application
+Aforementioned is the part of back-end building.Now we come to the front-end React application.
 
 Once we have Node and npm installed, let’s run the following command in the root folder of our Django project to create our React app. Here we create React app in the folder Python_Django_React in which the folder H_Django which contain our Django project has existed. In this case, python webapi server and React app can be run separately or respectively.
+
+```sh
 npx create-react-app h_react # Create React app
+```
 
 Here, we’ll use Bootstrap with React for styling with the powerful reactstrap package. Reactstrap is a popular library that provides Bootstrap components as React components. It allows developers to use Bootstrap's styling and lawet features in React applications without having to deal directly with jQuery or Bootstrap’s traditional JavaScript. With Reactstrap, we can easily create responsive web applications by utilizing pre-built components like modals, buttons, alerts, forms, and more.
 
 We also use Axios which is a popular JavaScript library used for making HTTP requests, typically in web applications. It allows developers to send asynchronous requests to APIs and handle responses easily (e.g. automatically transforms response data into JSON, simplifying data handling).
+
+```sh
 npm install bootstrap reactstrap axios --save
+```
 
 In the src/index.js file add the following import.
+```sh
 import "bootstrap/dist/css/bootstrap.min.css";
+```
 
 In src/ folder, create another folder called constants, and then a file index.js. This file will store the utility constants of our React project. Now add a single constant to hold the URL of our API.
+```sh
 export const API_URL = "http://localhost:8000/api/hzx/";
+```
 
 Then in components folder, create the Header.js and NewStudentInfo.js, add relevant codes.
 Then create a new component file called StudentModal.js and add the relevant codes.
@@ -201,6 +216,8 @@ Then create a component called StudentSet.js and add the relevant codes in it.
 Then create a component called ConfirmRemovalModal.js and add the relevant codes in it.
 Then create a component called MyHome.js and add the relevant codes in it.
 At last in App.js, we use the codes as follows:
+
+```sh
 import React, { Component, Fragment } from "react";
 import Header from "./components/Header";
 import MyHome from "./components/MyHome";
@@ -217,6 +234,7 @@ class App extends Component {
 }
 
 export default App;
+```
 
 Run the command npm start and our React app will open the browser. Before that, we should make sure to have your Django API up and running as well.
 
