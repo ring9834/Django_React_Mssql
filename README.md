@@ -238,4 +238,8 @@ export default App;
 
 Run the command npm start and our React app will open the browser. Before that, we should make sure to have your Django API up and running as well.
 
-NOTE: CORS_ORIGIN_ALLOW_ALL = True # since we’re working full localhost, we’ll disable the CORS feature by adding this line of code into our web_project/settings.py. Or, we will not get right result when testing using localhost.
+NOTE: Since we’re working full localhost, we’ll disable the CORS feature by adding this line of code into our web_project/settings.py. Or, we will not get right result when testing using localhost.
+```sh
+CORS_ORIGIN_ALLOW_ALL = True
+```
+
