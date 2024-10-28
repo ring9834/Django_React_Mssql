@@ -1,21 +1,37 @@
-# Django_React_Mssql --- Back end --- Django
-Ctrl+Shift+P, Then select the Python: Select Create Environment
+# Django_React_Mssql
+## Back end - Django API Creation
+In this project we use Vscode as IDE for creating Django API as well as React App. Following the steps below you can build the environment needed for the back-end API. Detailed codes can be referened in project folders.
 
-Ctrl+Shift+P, Then select the Python: Select Interpreter command
+Ctrl+Shift+P, Then select the Python: Select Create Environment.
+Ctrl+Shift+P, Then select the Python: Select Interpreter command.
 
+```sh
 source .venv/bin/activate (Linux/macOS) or .venv\Scripts\Activate.ps1 (Windows)
+```
 
+```sh
 python -m pip install --upgrade pip
+```
 
+```sh
 python -m pip install django
+```
 
+```sh
 django-admin startproject web_project .
+```
 
+```sh
 django-admin startapp hzx
+```
 
+```sh
 pip install djangorestframework  #Django REST framework is a powerful and flexible toolkit for building Web APIs in Django, and it's the go-to choice for this task.
+```
 
+```sh
 pip install django django-cors-headers # an app for handling the server headers required for CORS
+```
 
 After installing REST framework and 'corsheaders', add them as well as our app ‘hzx’ to the INSTALLED_APPS in our Django project's settings.py file:
 INSTALLED_APPS = [ 
@@ -147,6 +163,7 @@ python manage.py runserver # run our Django application in order to test these e
 
 We will see the Django’s Browsable API, a human-friendly HTML output that allows for easy browsing of resources, as well as forms for submitting data to the resources. It’s very handy for testing our endpoints easily without having to make use of cURL or other UI tools.
 
+## Front end - React App
 #Aforementioned is the part of back-end building.Now we come to the front-end React application
 
 Once we have Node and npm installed, let’s run the following command in the root folder of our Django project to create our React app. Here we create React app in the folder Python_Django_React in which the folder H_Django which contain our Django project has existed. In this case, python webapi server and React app can be run separately or respectively.
