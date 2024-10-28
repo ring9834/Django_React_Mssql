@@ -25,21 +25,24 @@ django-admin startproject web_project .
 django-admin startapp hzx
 ```
 
+Django REST framework is a powerful and flexible toolkit for building Web APIs in Django, and it's the go-to choice for this task.
 ```sh
-pip install djangorestframework  #Django REST framework is a powerful and flexible toolkit for building Web APIs in Django, and it's the go-to choice for this task.
+pip install djangorestframework  
 ```
-
+an app for handling the server headers required for CORS
 ```sh
-pip install django django-cors-headers # an app for handling the server headers required for CORS
+pip install django django-cors-headers 
 ```
 
 After installing REST framework and 'corsheaders', add them as well as our app ‘hzx’ to the INSTALLED_APPS in our Django project's settings.py file:
+```sh
 INSTALLED_APPS = [ 
  ... 
 'rest_framework',
 'corsheaders',
 'hzx',
  ]
+```
 
 Add the middleware related to corsheaders to MIDDLEWARE of settings.py. These correspond to a filter that will intercept all of our application’s requests and apply CORS logic to them.
 MIDDLEWARE = [
