@@ -1,4 +1,4 @@
-# Django_React_Mssql
+# Django_React_Mssql --- Back end --- Django
 Ctrl+Shift+P, Then select the Python: Select Create Environment
 
 Ctrl+Shift+P, Then select the Python: Select Interpreter command
@@ -76,6 +76,7 @@ the actions Django has to perform once the migration is triggered
         // ),
     ]
 
+# Django_React_Mssql --- Front end --- React
 
 #python manage.py migrate hzx zero # If we want to reverse all migrations applied for an app, use the name zero
 
