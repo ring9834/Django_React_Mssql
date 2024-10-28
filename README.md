@@ -1,4 +1,4 @@
-# Django_React_Mssql
+# Django + React + Mssql
 ## Back end - Django API Creation
 In this project we use Vscode as IDE for creating Django API as well as React App. Following the steps below you can build the environment needed for the back-end API. Detailed codes can be referened in project folders.
 
