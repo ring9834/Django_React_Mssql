@@ -29,7 +29,7 @@ Django REST framework is a powerful and flexible toolkit for building Web APIs i
 ```sh
 pip install djangorestframework  
 ```
-an app for handling the server headers required for CORS
+django-cors-headers is an app for handling the server headers required for CORS.
 ```sh
 pip install django django-cors-headers 
 ```
@@ -37,20 +37,23 @@ pip install django django-cors-headers
 After installing REST framework and 'corsheaders', add them as well as our app ‘hzx’ to the INSTALLED_APPS in our Django project's settings.py file:
 ```sh
 INSTALLED_APPS = [ 
- ... 
-'rest_framework',
-'corsheaders',
-'hzx',
+     #... 
+    'rest_framework',
+    'corsheaders',
+    'hzx',
  ]
 ```
 
 Add the middleware related to corsheaders to MIDDLEWARE of settings.py. These correspond to a filter that will intercept all of our application’s requests and apply CORS logic to them.
+```sh
 MIDDLEWARE = [
-     ...
+     #...
     'corsheaders.middleware.CorsMiddleware',
 ]
+```
 
 In the models.py of hzx python app, add the following codes. Student class extends from Django’s Model class. This will make our lives easier once it connects directly to the Django models framework, which we’ll use to create our database tables.
+```sh
 class Student(models.Model):
     name = models.CharField("Name", max_length=240)
     email = models.EmailField()
@@ -60,13 +63,17 @@ class Student(models.Model):
 
     def __str__(self):
         return self.name
+```
 
 Migrations are Django’s way of propagating changes we make to our models — such as adding a field or deleting a model — into our database schema.
+```sh
 python manage.py makemigrations
 python manage.py migrate # apply the changes to the database
 python manage.py makemigrations --empty --name student hzx # Create a data migration file which represents the direct manipulation of data into the database. We will see a file named ‘0002_student.py’ in hzx app folder.
+```
 
 In the file 0002_students.py, we modify its content as follows. create_data function will create initial data, just so that our database isn’t empty when the API starts.
+```sh
 def create_data(apps, schema_editor):
     Student = apps.get_model('hzx', 'Student')
     Student(name="Julia Hang", email="julia@email.com", document="54879685", phone="12345678").save()
@@ -80,20 +87,25 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RunPython(create_data),
     ]
+```
 
-python manage.py migrate # Important! If we don’t want use previous dependencies such 0001_initial, just comment all the Operations in all the files like ‘0003_studentenroll_phone.py’.
+```sh
+Important! If we don’t want use previous dependencies such 0001_initial, just comment all the Operations in all the files like ‘0003_studentenroll_phone.py’.
+python manage.py migrate 
+```
+```sh
 class Migration(migrations.Migration):
     dependencies = [
         ('hzx', '0002_studentenroll'),
-]
-the actions Django has to perform once the migration is triggered
-    operations = [ 
+    ]
+    operations = [ # the actions Django has to perform once the migration is triggered
         // migrations.AddField(
         //     model_name='studentenroll',
         //     name='phone',
         //     field=models.CharField(max_length=20, null=True),
         // ),
     ]
+```
 
 # Django_React_Mssql --- Front end --- React
 
